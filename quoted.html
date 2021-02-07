@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+
+
+<h2>{{value.symbol}}</h2>
+<h2>{{value.name}}</h2>
+<h2 style="color:blue;">{{value.price| usd}}</h2>
+
+
+{% endblock %}

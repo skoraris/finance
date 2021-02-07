@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+
+ <div class="table-responsive">
+        <table class="table table-sm table-dark table-hover table-dark">
+            <tr>
+                <th scope="col"><b>Symbol</b></th>
+                <th scope="col"><b>Shares</b></th>
+                <th scope="col"><b>Price</b></th>
+                <th scope="col"><b>Date of Transaction</b></th>
+            </tr>
+            {% for transaction in history %}
+
+            <tr>
+                <td>{{ transaction['Symbol'] }}</td>
+                <td>{{ transaction['Number'] }}</td>
+                <td>{{ (transaction['Price'])| usd }}</td>
+                <td>{{ transaction['Date'] }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+
+{% endblock %}

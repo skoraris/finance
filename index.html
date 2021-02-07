@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+
+
+{% block main %}
+
+    <div style="overflow-x:auto;">
+        <table class="table table-sm table-dark table-hover table-dark">
+            <tr>
+                <th scope="col"><b>Symbol</b></th>
+                <th scope="col"><b>Name</b></th>
+                <th scope="col"><b>Shares</b></th>
+                <th scope="col"><b>Price</b></th>
+                <th scope="col"><b>Total</b></th>
+            </tr>
+            {% set total =namespace(value=0) %} <!--η jinja με αυτόν τον τρόπο δημιουργεί ένα container λεξικο-->
+            {% for company in symbol %}         <!-- στο οποίο περνάς την τιμή της μεταβλητής σου για να κρατήσει τη scope-->
+                                            <!-- διότι δε δουλεύει όπως στην python πχ total=0 ... total = total+1-->
+            <tr>
+                <td>{{ company['Symbol'] }}</td>
+                <td>{{ company['Name'] }}</td>
+                <td>{{ company['total_shares'] }}</td>
+                <td>{{ company['price']| usd }}</td>
+                {% set total.value = (total.value + company['total_shares'] * company['price']) %}
+                <td>{{ (company['total_shares'] * company['price'])| usd }}</td>
+            </tr>
+            {% endfor %}
+             <tr>
+                <td>CASH</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ symbol[0]['cash']| usd }}</td>
+            </tr>
+            <tr>
+                <td><b>Total</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ (symbol[0]['cash'] + total.value)| usd }}</td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}

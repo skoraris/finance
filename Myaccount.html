@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My account
+{% endblock %}
+
+
+{% block main %}
+    <h1 style="color:lightgrey">Personal Info</h1>
+
+    <div class="table-responsive">
+        <table class="table  table-sm table-dark table-hover">
+            <tr>
+                <th scope="col"><b>Username</b></th>
+                <th scope="col"><b>Registration Date</b></th>
+            </tr>
+            <tr>
+                <td>{{ personal[0]['username'] }}</td>
+                <td>{{ personal[0]['Registration_Date'] }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <p style="color:black;"><i>Hello {{ personal[0]['username'] }} would you like to change your password ?</i></p>
+    <input id="button1" onclick="myFunction()" type="button" value="Change Password"><br><br>
+    <div id="passwd" style="display: none;">
+
+        <form action="/Myaccount" method ="POST">
+            <p>Your password has to be at least 5 characters long and contain at least one of the special characters below</p>
+            <p style="color:red;">'!','@','#','$','%','^','&','*','?' "</p>
+            <input id="oldpasswd" name="oldpasswd" autocomplete="off" placeholder="Type old password" type="password"><br>
+            <input id="retype" name="newpasswd" placeholder="Type New Password" type="password"><br>
+            <input id="retype" name="retype" placeholder="Retype New Password"  type="password"><br><br>
+            <button id="submit" name="submit" type="submit">Submit</button>
+        </form>
+    </div>
+
+
+<script>
+
+function myFunction() {
+  var x = document.getElementById("passwd");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+</script>
+
+{% endblock %}
